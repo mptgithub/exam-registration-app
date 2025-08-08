@@ -1,0 +1,17 @@
+{% extends "portal/base.html" %}
+
+{% block content %}
+  <h1>My Registrations</h1>
+  {% if registrations %}
+    <ul>
+      {% for registration in registrations %}
+        <li>
+          <h2>{{ registration.exam_session.title }}</h2>
+          <p><strong>Registered on:</strong> {{ registration.registration_time }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have not registered for any exam sessions.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "portal/base.html" %}
+
+{% block content %}
+  <h1>Available Exam Sessions</h1>
+  <ul>
+    {% for session in sessions %}
+      <li>
+        <h2>{{ session.title }}</h2>
+        <p>{{ session.description }}</p>
+        <p><strong>From:</strong> {{ session.start_time }}</p>
+        <p><strong>To:</strong> {{ session.end_time }}</p>
+        <p><strong>Available Seats:</strong> {{ session.available_seats }} / {{ session.capacity }}</p>
+        {% if user.is_authenticated %}
+          <a href="{% url 'portal:register_for_session' session.id %}">Register</a>
+        {% else %}
+          <p><a href="{% url 'login' %}">Login to register</a></p>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No exam sessions available.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
