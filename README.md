@@ -2,7 +2,50 @@
 
 This is a Django application for managing exam registrations. It provides a portal for students to register for exams and an administration interface for faculty to manage exam sessions.
 
-## Getting Started
+## Running with Docker (Recommended)
+
+The easiest way to run this application is with Docker. This avoids the need to install Python or other dependencies on your local machine.
+
+### Prerequisites
+
+- Docker installed on your machine.
+
+### 1. Build the Docker Image
+
+From the root directory of the project, run the following command to build the Docker image. This may take a few minutes the first time.
+
+```bash
+docker build -t exam-registration-app .
+```
+
+### 2. Run the Application
+
+Once the image is built, you can start the application with this command:
+
+```bash
+docker run -p 8000:8000 --name exam-reg-app exam-registration-app
+```
+
+The application will be available at `http://127.0.0.1:8000/`. The first time you run it, the database migrations will be applied automatically.
+
+### 3. Managing the Application (Creating Users)
+
+To run management commands like creating a superuser, you need to execute them on the running container.
+
+First, find the container ID by running `docker ps`.
+
+Then, use the `docker exec` command:
+
+```bash
+# Example: Create a superuser
+docker exec -it <container_id> python exam_registration/manage.py createsuperuser
+```
+
+After creating a superuser, you can follow the "User and Role Management" instructions below to set up user groups and create users.
+
+---
+
+## Getting Started (Manual Setup)
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
